@@ -11,7 +11,7 @@ namespace BoMbErMaN.Manager
 {
     public class Bomb_Manager
     {
-        public int ExplosionTime = 3000;    // 1000당 1초
+        public int ExplosionTime = 2000;    // 1000당 1초
         public PlayerClass Player = default;
         public Monster_Manager Monster = default;
         public Map_Manager Map = default;
@@ -48,7 +48,7 @@ namespace BoMbErMaN.Manager
                     int y2 = Monster.List[i].Dir_Y;
                     if (Map.Tile.Board[y2, x2] == "※")
                     {
-                        Monster.List[i].Set_Damage(50);
+                        Monster.List[i].Set_Damage(Player.Atk);
                     }
                 }
 

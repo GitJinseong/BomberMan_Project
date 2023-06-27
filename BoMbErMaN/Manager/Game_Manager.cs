@@ -50,6 +50,7 @@ namespace BoMbErMaN
             // 마을 생성
             Console.Clear();
             map = new Map_Manager(player);
+            player.Set_LinkMonster(monster);
             player.Set_LinkMap(map);
             map.Set_CreateMap001();
 

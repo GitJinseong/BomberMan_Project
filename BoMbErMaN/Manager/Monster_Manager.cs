@@ -8,6 +8,6 @@ namespace BoMbErMaN.Manager
 {
     public class Monster_Manager
     {
-        List<MonsterClass> List = new List<MonsterClass>();
+        public List<MonsterClass> List = new List<MonsterClass>();
     }
 }
