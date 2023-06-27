@@ -32,6 +32,8 @@ namespace BoMbErMaN.Manager
                 case ConsoleKey.Enter:
                     return "Enter";
 
+                case ConsoleKey.R:
+                    return "R";
                 default:
                     return " ";
             }

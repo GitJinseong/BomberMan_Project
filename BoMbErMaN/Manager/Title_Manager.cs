@@ -47,7 +47,7 @@ namespace BoMbErMaN.Manager
                 str = "└─────────────────────────────────────────────────────────────────────┘";
                 Console.WriteLine(str.PadLeft(PADDING_SIZE));
 
-                str = "Press Any Key.";
+                str = "Press the Arrow Keys and the Enter.";
                 Console.WriteLine(str.PadLeft(PADDING_SIZE));
                 Console.WriteLine();
                 Console.WriteLine();

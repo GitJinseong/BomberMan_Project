@@ -16,8 +16,8 @@ namespace BoMbErMaN.Manager
         const int MAIN_SIZE = 17;
         bool choiceMenu = false;
         int choiceCharacter = default;
-        int[,] charIntArray = new int[2,3] { {100, 20, 10}, {150, 10, 10} };
-        string[,] charStrArray = new string[2, 2] { {"Bomber_One", "♬"}, { "Bomber_Two", "ⓐ" } };
+        int[,] charIntArray = new int[2,3] { {200, 20, 10}, {250, 10, 20} };
+        string[,] charStrArray = new string[2, 2] { {"Bomber_one", "㉿"}, { "Bomber_two", "⑾"} };
 
         public PlayerClass Get_PrintList()
         {
@@ -62,7 +62,7 @@ namespace BoMbErMaN.Manager
                     }
                     else if (i == 10)
                     {
-                        str = "───────────────────────♬──────────────────────ⓐ────────────────────────";
+                        str = "───────────────────────"+charStrArray[0,1]+"──────────────────────"+charStrArray[1, 1]+"────────────────────────";
                         str = str.Replace("─", " ");
                     }
                     else
@@ -76,7 +76,7 @@ namespace BoMbErMaN.Manager
                 str = "───────────────────────────────────────────────────────────────────────";
                 Console.WriteLine(str.PadLeft(PADDING_SIZE));
 
-                str = "Press Any Key. ";
+                str = "Press the Arrow Keys and the Enter.";
                 Console.WriteLine(str.PadLeft(PADDING_SIZE));
                 Console.WriteLine();
                 Console.WriteLine();
@@ -168,7 +168,7 @@ namespace BoMbErMaN.Manager
                 str = "───────────────────────────────────────────────────────────────────────";
                 Console.WriteLine(str.PadLeft(PADDING_SIZE));
 
-                str = "Press Any Key. ";
+                str = "Press the Arrow Keys and the Enter.";
                 Console.WriteLine(str.PadLeft(PADDING_SIZE));
                 Console.WriteLine();
                 Console.WriteLine();
