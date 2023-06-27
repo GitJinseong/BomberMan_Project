@@ -14,13 +14,15 @@ namespace BoMbErMaN
         public string[,] Board = default;
         public Wall_Manager Wall = default;
         public PlayerClass Player = default;
-        public Tile_Manager(int x, int y ,int wallSize, PlayerClass player_)
+        public Monster_Manager Monster = default;
+        public Tile_Manager(int x, int y ,int wallSize, PlayerClass player_, Monster_Manager monster_)
         {
             Size_X = x;
             Size_Y = y;
             Board = new string[y, x];
             Wall = new Wall_Manager(wallSize);
             Player = player_;
+            Monster = monster_;
         }
 
         public bool Get_CheckWalls(int x, int y)
@@ -48,6 +50,15 @@ namespace BoMbErMaN
                     }
 
                     Board[y, x] = "　";
+
+                    for (int i = 0; i < Monster.List.Count; i++)
+                    {
+                        if (x == Monster.List[i].Dir_X && Monster.List[i].Dir_Y == y)
+                        {
+                            Board[y, x] = Monster.List[i].Pattern;
+                        }
+                    }
+
                     for (int i = 0; i < Wall.List.Count; i++)
                     {
                         if (x == Wall.List[i].Dir_X && Wall.List[i].Dir_Y == y)
@@ -69,7 +80,13 @@ namespace BoMbErMaN
             Console.SetCursorPosition(0, 2);
             if (Player.Dir_Y != 0)
             {
-                Board[Player.Dir_Y - 1, Player.Dir_X] = "▼";
+                int x = Player.Dir_X;
+                int y = Player.Dir_Y;
+                string pattern = Board[y - 1, x];
+                if (pattern == "　")
+                {
+                    Board[y - 1, x] = "▼";
+                }            
             }
             for (int y = 0; y < Size_Y; y++)
             {

@@ -29,50 +29,20 @@ namespace BoMbErMaN.Manager
             Monster = monster_;
         }
 
-        // 비동기 메서드
-        public async Task Get_CheckBomb()
-        {
-           while (true)
-            {
-                int x = Player.Dir_X;
-                int y = Player.Dir_Y;
-
-                if (Map.Tile.Board[y, x] == "※")
-                {
-                    Player.Set_Damage(50);
-                }
-
-                for (int i = 0; i < Monster.List.Count; i++)
-                {
-                    int x2 = Monster.List[i].Dir_X;
-                    int y2 = Monster.List[i].Dir_Y;
-                    if (Map.Tile.Board[y2, x2] == "※")
-                    {
-                        Monster.List[i].Set_Damage(Player.Atk);
-                    }
-                }
-
-                await Task.Delay(100);
-            }
-        }
-
         public void Set_CreateBomb()
         {
             int x = Player.Dir_X;
             int y = Player.Dir_Y;
-            if (Player.BombCount == 0 || Map.Tile.Board[y, x] == "※")
+            if (Player.BombCount == 0 || ("※" == Map.Tile.Board[y, x] || Map.Tile.Board[y, x] == "δ"))
             {
                 return;
             }
             Player.BombCount -= 1;
-            //BombClass bomb = new BombClass(x, y);
             Map.Tile.Board[y, x] = "δ";
-            UI.Get_PrintPlayBox();
             Map.Get_PrintMap();
 
             Task.Delay(ExplosionTime).ContinueWith(t =>
             {
-                //bomb = default;
                 Map.Tile.Board[y, x] = "※";
                 for (int i = 1; i < Player.BombPower; i++)
                 {
@@ -81,10 +51,23 @@ namespace BoMbErMaN.Manager
                     Map.Tile.Board[y, x - i] = "※";
                     Map.Tile.Board[y, x + i] = "※";
                 }
-                UI.Get_PrintPlayBox();
+                if (Map.Tile.Board[Player.Dir_Y, Player.Dir_X] == "※")
+                {
+                    Player.Set_Damage(50);
+                }
+
+                for (int i = 0; i < Monster.List.Count; i++)
+                {
+                    if (Map.Tile.Board[Monster.List[i].Dir_Y, Monster.List[i].Dir_X] == "※")
+                    {
+                        Monster.List[1].Set_Damage(50);
+
+                    }
+                }
+
                 Map.Get_PrintMap();
                 Player.BombCount += 1;
-                Task.Delay(ExplosionTime / 2).ContinueWith(t2 =>
+                Task.Delay(ExplosionTime / 4).ContinueWith(t2 =>
                 {
                     Map.Tile.Board[y, x] = "　";
                     for (int i = 1; i < Player.BombPower; i++)
@@ -94,7 +77,6 @@ namespace BoMbErMaN.Manager
                         Map.Tile.Board[y, x - i] = "　";
                         Map.Tile.Board[y, x + i] = "　";
                     }
-                    UI.Get_PrintPlayBox();
                     Map.Get_PrintMap();
                 });
                 

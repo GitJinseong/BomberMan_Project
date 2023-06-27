@@ -57,7 +57,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Manager\Tile_Manager.cs" />
-    <Compile Include="Slime.cs" />
+    <Compile Include="OrcChild.cs" />
+    <Compile Include="GoblinChild.cs" />
+    <Compile Include="SlimeChild.cs" />
     <Compile Include="WallClass.cs" />
   </ItemGroup>
   <ItemGroup>

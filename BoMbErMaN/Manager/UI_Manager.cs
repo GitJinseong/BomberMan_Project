@@ -71,6 +71,8 @@ namespace BoMbErMaN.Manager
                 str = str + "★";
             }
             Console.WriteLine(str.PadLeft(17 + (Player.Def / 10)));
+
+
         }
     }
 }

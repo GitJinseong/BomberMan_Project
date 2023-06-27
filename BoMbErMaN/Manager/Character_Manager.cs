@@ -16,7 +16,7 @@ namespace BoMbErMaN.Manager
         const int MAIN_SIZE = 17;
         bool choiceMenu = false;
         int choiceCharacter = default;
-        int[,] charIntArray = new int[2,3] { {200, 20, 10}, {250, 10, 20} };
+        int[,] charIntArray = new int[2,3] { {200, 200, 10}, {250, 100, 20} };
         string[,] charStrArray = new string[2, 2] { {"Bomber_one", "㉿"}, { "Bomber_two", "⑾"} };
 
         public PlayerClass Get_PrintList()

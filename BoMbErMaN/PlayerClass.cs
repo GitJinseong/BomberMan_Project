@@ -12,7 +12,7 @@ namespace BoMbErMaN
     public class PlayerClass
     {
         public string Name { get; private set; } = default;
-        public string Pattern { get; private set; } = default;
+        public string Pattern { get; set; } = default;
         public int Hp { get; private set; } = default;
         public int MaxHP { get; private set; } = default;
         public int Atk { get; private set; } = default;
@@ -83,7 +83,7 @@ namespace BoMbErMaN
                     if (!Map.Tile.Get_CheckWalls(x, y - 1))
                     {
                         Dir_Y = (y == 0) ? y : y - 1;
-                    } 
+                    }
                     break;
                 case "Down":
                     if (!Map.Tile.Get_CheckWalls(x, y + 1))
@@ -111,6 +111,18 @@ namespace BoMbErMaN
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void Get_IsDeath()
+        {
+            if (Hp <= 0)
+            {
+                Console.Clear();
+                while(true)
+                {
+                    Console.Write("GAMEOVER ");
+                }
             }
         }
     }
