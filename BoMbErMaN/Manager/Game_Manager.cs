@@ -15,10 +15,23 @@ namespace BoMbErMaN
         // 매니저 생성
         Title_Manager Title = new Title_Manager();
         Character_Manager Character = new Character_Manager();
-        Monster_Manager Monster = new Monster_Manager();
+        Monster_Manager Monster = default;
         Map_Manager Map = default;
         PlayerClass Player = default;
         UI_Manager UI = default;
+
+        // 델리게이트 선언
+        delegate void myDelegate();
+        myDelegate[] FuncArray = default;
+
+        public void Get_Clear()
+        {
+            Console.Clear();
+            while (true)
+            {
+                Console.Write("WIN ");
+            }
+        }
 
         public void Get_Start()
         {
@@ -47,7 +60,10 @@ namespace BoMbErMaN
             // UI 생성
             UI = new UI_Manager(Player);
 
-            // UI 링크
+            // 몬스터 생성
+            Monster = new Monster_Manager(Player);
+
+            // 링크
             Player.Set_LinkUI(UI);
 
             // 마을 생성
@@ -55,9 +71,17 @@ namespace BoMbErMaN
             Map = new Map_Manager(Player, Monster);
             Player.Set_LinkMonster(Monster);
             Player.Set_LinkMap(Map);
-            Player.Set_LinkBomb();
+            Player.Set_CreateBomb();
             Map.Set_CreateMap001();
 
+            // 델리 게이트 초기화
+            FuncArray = new myDelegate[3];
+            FuncArray[0] = Map.Set_CreateMap001;
+            FuncArray[1] = Map.Set_CreateMap002;
+            FuncArray[2] = Map.Set_CreateMap003;
+
+            int stage = 0;
+            // 게임 실행
             while (true)
             {
                 Console.SetCursorPosition(0, 0);
@@ -66,6 +90,17 @@ namespace BoMbErMaN
                 Player.Get_IsDead();
                 Thread.Sleep(32);
                 Console.Clear();
+                if (1 <= Player.KillCount)
+                {
+                    stage++;
+                    // 게임 클리어
+                    if (stage == 3)
+                    {
+                        Get_Clear();
+                    }
+                    FuncArray[stage]();
+                    Player.Set_ResetCount();
+                }
             }
         }
     }

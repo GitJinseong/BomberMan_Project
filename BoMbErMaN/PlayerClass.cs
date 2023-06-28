@@ -11,7 +11,7 @@ namespace BoMbErMaN
 {
     public class PlayerClass
     {
-        public string Name { get; private set; } = default;
+        public string Name { get; set; } = default;
         public string Pattern { get; set; } = default;
         public int Hp { get; private set; } = default;
         public int MaxHP { get; private set; } = default;
@@ -21,7 +21,9 @@ namespace BoMbErMaN
         public int Dir_Y { get; private set; } = 5;
 
         public int BombCount = 3;   // 보유한 폭탄 갯수
-        public int BombPower = 2;   // 폭발 범위
+        public int BombPower = 10;  // 폭발 범위
+        public int KillCount = 0;   // 잡은 몬스터 마릿수
+        public int stage = 0;
 
         public Bomb_Manager Bomb = default;
         public Input_Manager Input = new Input_Manager();
@@ -54,9 +56,19 @@ namespace BoMbErMaN
             Map = map_;
         }
 
-        public void Set_LinkBomb()
+        public void Set_CreateBomb()
         {
             Bomb = new Bomb_Manager(this, Map, UI);
+        }
+
+        public void Set_AddCount()
+        {
+            KillCount++;
+        }
+
+        public void Set_ResetCount()
+        {
+            KillCount = 0;
         }
 
         public void Set_Damage(int damage)

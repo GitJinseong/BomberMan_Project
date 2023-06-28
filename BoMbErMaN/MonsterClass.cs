@@ -16,6 +16,7 @@ namespace BoMbErMaN
         public int Def { get; protected set; } = default;
         public int Dir_X { get; protected set; } = default;
         public int Dir_Y { get; protected set; } = default;
+        MonsterAIClass AI = new MonsterAIClass();
 
         public void Set_Damage(int damage)
         {

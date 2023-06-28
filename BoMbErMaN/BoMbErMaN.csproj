@@ -52,6 +52,7 @@
     <Compile Include="Manager\Title_Manager.cs" />
     <Compile Include="Manager\UI_Manager.cs" />
     <Compile Include="Manager\Wall_Manager.cs" />
+    <Compile Include="MonsterAIClass.cs" />
     <Compile Include="MonsterClass.cs" />
     <Compile Include="PlayerClass.cs" />
     <Compile Include="Program.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Manager\Tile_Manager.cs" />
     <Compile Include="OrcChild.cs" />
     <Compile Include="GoblinChild.cs" />
+    <Compile Include="Properties\BombClass.cs" />
     <Compile Include="SlimeChild.cs" />
     <Compile Include="WallClass.cs" />
   </ItemGroup>

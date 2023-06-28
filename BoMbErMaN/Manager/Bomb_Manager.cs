@@ -38,71 +38,7 @@ namespace BoMbErMaN.Manager
             Map.Tile.Board[y, x] = "δ";
             Map.Get_PrintMap();
 
-            Set_Explosion(x, y);
-            //Task.Delay(ExplosionTime).ContinueWith(t =>
-            //{
-            //    Map.Tile.Board[y, x] = "※";
-            //    for (int i = 1; i < Player.BombPower; i++)
-            //    {
-            //        if (!(y - i < 0))
-            //        {
-            //            Map.Tile.Board[y - i, x] = "※";
-            //        }
-            //        if (!(y + i > Map.MapSize_Y))
-            //        {
-            //            Map.Tile.Board[y + i, x] = "※";
-            //        }
-            //        if (!(x - i < 0))
-            //        {
-            //            Map.Tile.Board[y, x - i] = "※";
-            //        }
-            //        if (!(x + i > Map.MapSize_X))
-            //        {
-            //            Map.Tile.Board[y, x + i] = "※";
-            //        }
-            //    }
-            //    if (Map.Tile.Board[Player.Dir_Y, Player.Dir_X] == "※")
-            //    {
-            //        Player.Set_Damage(50);
-            //    }
-
-            //    for (int i = 0; i < Monster.List.Count; i++)
-            //    {
-            //        if (Map.Tile.Board[Monster.List[i].Dir_Y, Monster.List[i].Dir_X] == "※")
-            //        {
-            //            Monster.List[1].Set_Damage(50);
-
-            //        }
-            //    }
-
-            //    Map.Get_PrintMap();
-            //    Player.BombCount += 1;
-            //    Task.Delay(ExplosionTime / 4).ContinueWith(t2 =>
-            //    {
-            //        Map.Tile.Board[y, x] = "　";
-            //        for (int i = 1; i < Player.BombPower; i++)
-            //        {
-            //            if (!(y - i < 0))
-            //            {
-            //                Map.Tile.Board[y - i, x] = "　";
-            //            }
-            //            if (!(y + i > Map.MapSize_Y))
-            //            {
-            //                Map.Tile.Board[y + i, x] = "　";
-            //            }
-            //            if (!(x - i < 0))
-            //            {
-            //                Map.Tile.Board[y, x - i] = "　";
-            //            }
-            //            if (!(x + i > Map.MapSize_X))
-            //            {
-            //                Map.Tile.Board[y, x + i] = "　";
-            //            }
-            //        }
-            //        Map.Get_PrintMap();
-            //    });
-
-            //});
+            Set_Explosion(x, y);   
         }
 
         public async Task Set_Explosion(int x, int y)
@@ -111,19 +47,19 @@ namespace BoMbErMaN.Manager
             Map.Tile.Board[y, x] = "※";
             for (int i = 1; i < Player.BombPower; i++)
             {
-                if (!(y - i < 0))
+                if (!(y - i < 0) && Map.Tile.Board[y - i, x] != "δ")
                 {
                     Map.Tile.Board[y - i, x] = "※";
                 }
-                if (!(y + i > Map.MapSize_Y))
+                if (!(y + i > Map.MapSize_Y - 1) && Map.Tile.Board[y + i, x] != "δ")
                 {
                     Map.Tile.Board[y + i, x] = "※";
                 }
-                if (!(x - i < 0))
+                if (!(x - i < 0)&& Map.Tile.Board[y, x - i] != "δ")
                 {
                     Map.Tile.Board[y, x - i] = "※";
                 }
-                if (!(x + i > Map.MapSize_X))
+                if (!(x + i > Map.MapSize_X - 1) && Map.Tile.Board[y, x + i] != "δ")
                 {
                     Map.Tile.Board[y, x + i] = "※";
                 }
@@ -152,19 +88,19 @@ namespace BoMbErMaN.Manager
             Map.Tile.Board[y, x] = "　";
             for (int i = 1; i < Player.BombPower; i++)
             {
-                if (!(y - i < 0))
+                if (!(y - i < 0) && Map.Tile.Board[y - i, x] == "※")
                 {
                     Map.Tile.Board[y - i, x] = "　";
                 }
-                if (!(y + i > Map.MapSize_Y))
+                if (!(y + i > Map.MapSize_Y - 1) && Map.Tile.Board[y + i, x] == "※")
                 {
                     Map.Tile.Board[y + i, x] = "　";
                 }
-                if (!(x - i < 0))
+                if (!(x - i < 0) && Map.Tile.Board[y, x - i] == "※")
                 {
                     Map.Tile.Board[y, x - i] = "　";
                 }
-                if (!(x + i > Map.MapSize_X))
+                if (!(x + i > Map.MapSize_X - 1) && Map.Tile.Board[y, x + i] == "※")
                 {
                     Map.Tile.Board[y, x + i] = "　";
                 }

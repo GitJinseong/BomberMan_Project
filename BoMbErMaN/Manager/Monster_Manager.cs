@@ -9,7 +9,12 @@ namespace BoMbErMaN.Manager
     public class Monster_Manager
     {
         public List<MonsterClass> List = default;
+        public PlayerClass Player = default;
         public Random random = new Random();
+        public Monster_Manager(PlayerClass player_)
+        {
+            Player = player_;
+        }
 
         public void Set_CreateStage_001(int map_X, int map_Y, int count)
         {
@@ -48,6 +53,7 @@ namespace BoMbErMaN.Manager
                 if (List[i].Hp == 0)
                 {
                     List.RemoveAt(i);
+                    Player.Set_AddCount();
                 }
             }
         }
