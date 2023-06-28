@@ -14,7 +14,7 @@ namespace BoMbErMaN.Manager
         {
             for (int i = 0; i < size; i++)
             {
-                WallClass wall = new WallClass(0,0,"◈");
+                WallClass wall = new WallClass(0,0, "■");
                 List.Add(wall);
             }
         }

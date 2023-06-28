@@ -43,9 +43,9 @@ namespace BoMbErMaN.Manager
 
         public void Get_IsDead()
         {
-            for (int i = List.Count - 1; i > -1; i--)
+            for (int i = List.Count - 1; i >= 0; i--)
             {
-                if (List[i].Hp <= 0)
+                if (List[i].Hp == 0)
                 {
                     List.RemoveAt(i);
                 }

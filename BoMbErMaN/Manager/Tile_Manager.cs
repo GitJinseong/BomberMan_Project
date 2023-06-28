@@ -27,13 +27,14 @@ namespace BoMbErMaN
 
         public bool Get_CheckWalls(int x, int y)
         {
-            for (int i = 0; i < Wall.List.Count; i++)
+            if (0 > y || 0 > x || Size_X - 1 < x || Size_Y - 1 < y)
             {
-                if (x == Wall.List[i].Dir_X & Wall.List[i].Dir_X == y)
-                {
-                    return true;
-                }   
+                return true;
             }
+            if ("　" != Board[y, x] && Board[y, x] != "▼")
+            {
+                return true;
+            }   
 
             return false;
         }
@@ -104,20 +105,20 @@ namespace BoMbErMaN
             }
         }
 
-        public void Get_PrintHouse001()
-        {
-            string str = "　　────────────";
-            Console.WriteLine(str.PadLeft(50));
-            str = "　　────────────";
-            Console.WriteLine(str.PadLeft(50));
-            str = "　／           ／＼";
-            Console.WriteLine(str.PadLeft(50));
-            str = " ／__Stage!___／　 ＼";
-            Console.WriteLine(str.PadLeft(50));
-            str = " ┃ # ______ # ┃ 　 ┃";
-            Console.WriteLine(str.PadLeft(50));
-            str = " ┃___┃ #┃_____┃____┃";
-            Console.WriteLine(str.PadLeft(50));
-        }
+        //public void Get_PrintHouse001()
+        //{
+        //    string str = "　　────────────";
+        //    Console.WriteLine(str.PadLeft(50));
+        //    str = "　　────────────";
+        //    Console.WriteLine(str.PadLeft(50));
+        //    str = "　／           ／＼";
+        //    Console.WriteLine(str.PadLeft(50));
+        //    str = " ／__Stage!___／　 ＼";
+        //    Console.WriteLine(str.PadLeft(50));
+        //    str = " ┃ # ______ # ┃ 　 ┃";
+        //    Console.WriteLine(str.PadLeft(50));
+        //    str = " ┃___┃ #┃_____┃____┃";
+        //    Console.WriteLine(str.PadLeft(50));
+        //}
     }
 }

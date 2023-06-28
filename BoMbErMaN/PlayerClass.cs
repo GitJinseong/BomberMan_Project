@@ -21,7 +21,7 @@ namespace BoMbErMaN
         public int Dir_Y { get; private set; } = 5;
 
         public int BombCount = 3;   // 보유한 폭탄 갯수
-        public int BombPower = 3;   // 폭발 범위
+        public int BombPower = 2;   // 폭발 범위
 
         public Bomb_Manager Bomb = default;
         public Input_Manager Input = new Input_Manager();
@@ -52,11 +52,16 @@ namespace BoMbErMaN
         public void Set_LinkMap(Map_Manager map_)
         {
             Map = map_;
-            Bomb = new Bomb_Manager(this, map_, UI);
+        }
+
+        public void Set_LinkBomb()
+        {
+            Bomb = new Bomb_Manager(this, Map, UI);
         }
 
         public void Set_Damage(int damage)
         {
+            damage = damage < Def ? 1 : damage - Def;
             Hp = (Hp - damage) < 0 ? 0 : Hp - damage;
         }
 

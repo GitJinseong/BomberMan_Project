@@ -19,6 +19,7 @@ namespace BoMbErMaN
 
         public void Set_Damage(int damage)
         {
+            damage = damage < Def ? 1 : damage - Def;
             Hp = (Hp - damage) < 0 ? 0 : Hp - damage;
         }
 

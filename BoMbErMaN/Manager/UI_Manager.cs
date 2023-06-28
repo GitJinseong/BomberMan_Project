@@ -15,15 +15,16 @@ namespace BoMbErMaN.Manager
             Player = player_;
         }
 
-        public void Get_PrintPlayBox()
+        public void Get_PrintPlayBox(string mapName)
         {
-            // 커서 위치 설정
-            Console.SetCursorPosition(0, 1);
-
+            string str = "";
             int mainSize = 17;
             int padding = 96;
+            // 커서 위치 설정
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine(mapName.PadLeft((padding / 2) + mapName.Length));
 
-            string str = "┌───────────────────────────────────────────────────────────────────────────────────┐";
+            str = "┌───────────────────────────────────────────────────────────────────────────────────┐";
             Console.WriteLine(str.PadLeft(padding));
 
             str = "│───────────────────────────────────────────────────────────────────────────────────│";

@@ -55,6 +55,7 @@ namespace BoMbErMaN
             Map = new Map_Manager(Player, Monster);
             Player.Set_LinkMonster(Monster);
             Player.Set_LinkMap(Map);
+            Player.Set_LinkBomb();
             Map.Set_CreateMap001();
 
             while (true)
@@ -63,7 +64,6 @@ namespace BoMbErMaN
                 Map.Get_PrintMap();
                 Player.Set_Actions();
                 Player.Get_IsDead();
-                Monster.Get_IsDead();
                 Thread.Sleep(32);
                 Console.Clear();
             }
