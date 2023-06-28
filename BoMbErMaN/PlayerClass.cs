@@ -114,7 +114,7 @@ namespace BoMbErMaN
             }
         }
 
-        public void Get_IsDeath()
+        public void Get_IsDead()
         {
             if (Hp <= 0)
             {

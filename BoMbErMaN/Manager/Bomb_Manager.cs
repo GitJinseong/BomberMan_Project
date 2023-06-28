@@ -33,7 +33,8 @@ namespace BoMbErMaN.Manager
         {
             int x = Player.Dir_X;
             int y = Player.Dir_Y;
-            if (Player.BombCount == 0 || ("※" == Map.Tile.Board[y, x] || Map.Tile.Board[y, x] == "δ"))
+            string pattern = Map.Tile.Board[y, x];
+            if (Player.BombCount == 0 || "※" == pattern || pattern == "δ")
             {
                 return;
             }
@@ -46,24 +47,36 @@ namespace BoMbErMaN.Manager
                 Map.Tile.Board[y, x] = "※";
                 for (int i = 1; i < Player.BombPower; i++)
                 {
-                    Map.Tile.Board[y - i, x] = "※";
-                    Map.Tile.Board[y + i, x] = "※";
-                    Map.Tile.Board[y, x - i] = "※";
-                    Map.Tile.Board[y, x + i] = "※";
+                    if (!(y - i < 0))
+                    {
+                        Map.Tile.Board[y - i, x] = "※";
+                    }
+                    if (!(y + i > Map.MapSize_Y))
+                    {
+                        Map.Tile.Board[y + i, x] = "※";
+                    }
+                    if (!(x - i < 0))
+                    {
+                        Map.Tile.Board[y, x - i] = "※";
+                    }
+                    if (!(x + i > Map.MapSize_X))
+                    {
+                        Map.Tile.Board[y, x + i] = "※";
+                    }
                 }
                 if (Map.Tile.Board[Player.Dir_Y, Player.Dir_X] == "※")
                 {
                     Player.Set_Damage(50);
                 }
 
-                for (int i = 0; i < Monster.List.Count; i++)
-                {
-                    if (Map.Tile.Board[Monster.List[i].Dir_Y, Monster.List[i].Dir_X] == "※")
-                    {
-                        Monster.List[1].Set_Damage(50);
+                //for (int i = 0; i < Monster.List.Count; i++)
+                //{
+                //    if (Map.Tile.Board[Monster.List[i].Dir_Y, Monster.List[i].Dir_X] == "※")
+                //    {
+                //        Monster.List[1].Set_Damage(50);
 
-                    }
-                }
+                //    }
+                //}
 
                 Map.Get_PrintMap();
                 Player.BombCount += 1;
@@ -72,10 +85,22 @@ namespace BoMbErMaN.Manager
                     Map.Tile.Board[y, x] = "　";
                     for (int i = 1; i < Player.BombPower; i++)
                     {
-                        Map.Tile.Board[y - i, x] = "　";
-                        Map.Tile.Board[y + i, x] = "　";
-                        Map.Tile.Board[y, x - i] = "　";
-                        Map.Tile.Board[y, x + i] = "　";
+                        if (!(y - i < 0))
+                        {
+                            Map.Tile.Board[y - i, x] = "　";
+                        }
+                        if (!(y + i > Map.MapSize_Y))
+                        {
+                            Map.Tile.Board[y + i, x] = "　";
+                        }
+                        if (!(x - i < 0))
+                        {
+                            Map.Tile.Board[y, x - i] = "　";
+                        }
+                        if (!(x + i > Map.MapSize_X))
+                        {
+                            Map.Tile.Board[y, x + i] = "　";
+                        }
                     }
                     Map.Get_PrintMap();
                 });

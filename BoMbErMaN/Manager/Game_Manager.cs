@@ -62,7 +62,7 @@ namespace BoMbErMaN
                 Console.SetCursorPosition(0, 0);
                 Map.Get_PrintMap();
                 Player.Set_Actions();
-                Player.Get_IsDeath();
+                Player.Get_IsDead();
                 Monster.Get_IsDead();
                 Thread.Sleep(32);
                 Console.Clear();
