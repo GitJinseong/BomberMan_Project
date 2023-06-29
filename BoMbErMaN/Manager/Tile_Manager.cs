@@ -15,7 +15,7 @@ namespace BoMbErMaN
         public Wall_Manager Wall = default;
         public PlayerClass Player = default;
         public Monster_Manager Monster = default;
-        public Tile_Manager(int x, int y ,int wallSize, PlayerClass player_, Monster_Manager monster_)
+        public Tile_Manager(int x, int y, int wallSize, PlayerClass player_, Monster_Manager monster_)
         {
             Size_X = x;
             Size_Y = y;
@@ -92,7 +92,7 @@ namespace BoMbErMaN
                 if (pattern == "　")
                 {
                     Board[y - 1, x] = "▼";
-                }            
+                }
             }
             for (int y = 0; y < Size_Y; y++)
             {
@@ -121,21 +121,5 @@ namespace BoMbErMaN
                 Console.WriteLine();
             }
         }
-
-        //public void Get_PrintHouse001()
-        //{
-        //    string str = "　　────────────";
-        //    Console.WriteLine(str.PadLeft(50));
-        //    str = "　　────────────";
-        //    Console.WriteLine(str.PadLeft(50));
-        //    str = "　／           ／＼";
-        //    Console.WriteLine(str.PadLeft(50));
-        //    str = " ／__Stage!___／　 ＼";
-        //    Console.WriteLine(str.PadLeft(50));
-        //    str = " ┃ # ______ # ┃ 　 ┃";
-        //    Console.WriteLine(str.PadLeft(50));
-        //    str = " ┃___┃ #┃_____┃____┃";
-        //    Console.WriteLine(str.PadLeft(50));
-        //}
     }
 }
