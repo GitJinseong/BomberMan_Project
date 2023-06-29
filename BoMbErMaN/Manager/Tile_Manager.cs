@@ -25,20 +25,25 @@ namespace BoMbErMaN
             Monster = monster_;
         }
 
-        public bool Get_CheckWalls(int x, int y)
+        public bool Get_CheckWall(int x, int y)
         {
-            if (0 > y || 0 > x || Size_X - 1 < x || Size_Y - 1 < y)
+            if ((0 > y || 0 > x || Size_X - 1 < x || Size_Y - 1 < y) || ("　" != Board[y, x] && Board[y, x] != "▼"))
             {
                 return true;
             }
-            if ("　" != Board[y, x] && Board[y, x] != "▼")
-            {
-                return true;
-            }   
 
             return false;
         }
 
+        public bool Get_CheckMonsterMove(int x, int y)
+        {
+            if ((0 > y || 0 > x || Size_X - 1 < x || Size_Y - 1 < y) || ("　" != Board[y, x] && Board[y, x] != "▼"))
+            {
+                return true;
+            }
+
+            return false;
+        }
         public void Set_CreateTiles()
         {
             for (int y = 0; y < Size_Y; y++)
@@ -93,6 +98,18 @@ namespace BoMbErMaN
             {
                 for (int x = 0; x < Size_X; x++)
                 {
+                    if (Player.IsHit > 0 && (x == Player.Dir_X && Player.Dir_Y == y))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(Board[y, x]);
+                        Console.ResetColor();
+                        Player.IsHit++;
+                        if (Player.IsHit >= 5)
+                        {
+                            Player.IsHit = 0;
+                        }
+                        continue;
+                    }
                     if (x == 0)
                     {
                         string str = "│ " + Board[y, x];

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -44,29 +45,36 @@ namespace BoMbErMaN.Manager
         public async Task Set_Explosion(int x, int y)
         {
             await Task.Delay(ExplosionTime);
+            bool up = false; bool down = false; bool left = false; bool right = false;
             Map.Tile.Board[y, x] = "※";
             for (int i = 1; i < Player.BombPower; i++)
             {
-                if (!(y - i < 0) && Map.Tile.Board[y - i, x] != "δ")
+                if (!(y - i < 0) && "δ" != Map.Tile.Board[y - i, x] && "■" != Map.Tile.Board[y - i, x])
                 {
-                    Map.Tile.Board[y - i, x] = "※";
+                    if (!up) { Map.Tile.Board[y - i, x] = "※"; }
                 }
-                if (!(y + i > Map.MapSize_Y - 1) && Map.Tile.Board[y + i, x] != "δ")
+                else { up = true; }
+                if (!(y + i > Map.MapSize_Y - 1) && Map.Tile.Board[y + i, x] != "δ" && "■" != Map.Tile.Board[y + i, x])
                 {
-                    Map.Tile.Board[y + i, x] = "※";
+                    if (!down) { Map.Tile.Board[y + i, x] = "※"; }
                 }
-                if (!(x - i < 0)&& Map.Tile.Board[y, x - i] != "δ")
+                else { down = true; }
+                if (!(x - i < 0)&& Map.Tile.Board[y, x - i] != "δ" && "■" != Map.Tile.Board[y, x - i])
                 {
-                    Map.Tile.Board[y, x - i] = "※";
+                    if (!left) { Map.Tile.Board[y, x - i] = "※"; }
+                    
                 }
-                if (!(x + i > Map.MapSize_X - 1) && Map.Tile.Board[y, x + i] != "δ")
+                else { left = true; }
+                if (!(x + i > Map.MapSize_X - 1) && Map.Tile.Board[y, x + i] != "δ" && "■" != Map.Tile.Board[y, x + i])
                 {
-                    Map.Tile.Board[y, x + i] = "※";
+                    if (!right) { Map.Tile.Board[y, x + i] = "※"; }
                 }
+                else { right = true; }
             }
             if (Map.Tile.Board[Player.Dir_Y, Player.Dir_X] == "※")
             {
                 Player.Set_Damage(50);
+                Player.IsHit = 1;
             }
 
             for (int i = 0; i < Monster.List.Count; i++)
@@ -79,10 +87,10 @@ namespace BoMbErMaN.Manager
             Monster.Get_IsDead();
             Map.Get_PrintMap();
             Player.BombCount += 1;
-            Set_RemoveExplosion(x, y);
+            Set_RemoveExplosion(x, y, up, down, left, right);
         }
 
-        public async Task Set_RemoveExplosion(int x, int y)
+        public async Task Set_RemoveExplosion(int x, int y, bool up, bool down, bool left, bool right)
         {
             await Task.Delay(ExplosionTime / 4);
             Map.Tile.Board[y, x] = "　";

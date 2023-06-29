@@ -46,6 +46,64 @@ namespace BoMbErMaN.Manager
             }
         }
 
+        public async Task Set_Moves(Map_Manager map)
+        {
+            while (true)
+            {
+                await Task.Delay(500);
+                int size_x = map.MapSize_X;
+                int size_y = map.MapSize_Y;
+                for (int i = 0; i < List.Count; i++)
+                {
+                    int x = List[i].Dir_X;
+                    int y = List[i].Dir_Y;
+                    if (x == 0)
+                    {
+                        x = size_x - 1;
+                    }
+                    int moveCount = 0;
+                    while (moveCount == 0)
+                    {
+                        int num = random.Next(0, 3);
+                        switch (num)
+                        {
+                            case 0:
+                                if (!map.Tile.Get_CheckMonsterMove(x, y - 1))
+                                {
+                                    List[i].Set_Dir_Y((y == 0) ? y : y - 1);
+                                    moveCount++;
+                                }
+                                break;
+                            case 1:
+                                if (!map.Tile.Get_CheckMonsterMove(x - 1, y))
+                                {
+                                    List[i].Set_Dir_X((x == 0) ? x : x - 1);
+                                    moveCount++;
+                                }
+                                break;
+                            case 2:
+                                if (!map.Tile.Get_CheckMonsterMove(x, y + 1))
+                                {
+                                    List[i].Set_Dir_Y((y == size_y - 1) ? y : y + 1);
+                                    moveCount++;
+                                }
+                                break;
+                            case 3:
+                                if (!map.Tile.Get_CheckMonsterMove(x + 1, y))
+                                {
+                                    List[i].Set_Dir_X((x == size_x - 1) ? x : x + 1);
+                                    moveCount++;
+                                }
+                                break;
+                        }
+                    }
+                }
+
+                Console.Clear();
+                map.Get_PrintMap();
+            }    
+        }
+
         public void Get_IsDead()
         {
             for (int i = List.Count - 1; i >= 0; i--)

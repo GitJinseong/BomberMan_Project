@@ -17,9 +17,10 @@ namespace BoMbErMaN
         public int MaxHP { get; private set; } = default;
         public int Atk { get; private set; } = default;
         public int Def { get; private set; } = default;
-        public int Dir_X { get; private set; } = 5;
-        public int Dir_Y { get; private set; } = 5;
+        public int Dir_X { get; private set; } = 20;
+        public int Dir_Y { get; private set; } = 8;
 
+        public int IsHit = 0; // 1일 경우 true
         public int BombCount = 3;   // 보유한 폭탄 갯수
         public int BombPower = 10;  // 폭발 범위
         public int KillCount = 0;   // 잡은 몬스터 마릿수
@@ -88,6 +89,12 @@ namespace BoMbErMaN
             Dir_Y = y;
         }
 
+        public void Set_Move(int x, int y)
+        {
+            Dir_X = x;
+            Dir_Y = y;
+        }
+
         public void Set_Actions()
         {
             int x = Dir_X;
@@ -97,25 +104,25 @@ namespace BoMbErMaN
             switch (Input.Get_Input())
             {
                 case "Up":
-                    if (!Map.Tile.Get_CheckWalls(x, y - 1))
+                    if (!Map.Tile.Get_CheckWall(x, y - 1))
                     {
                         Dir_Y = (y == 0) ? y : y - 1;
                     }
                     break;
                 case "Down":
-                    if (!Map.Tile.Get_CheckWalls(x, y + 1))
+                    if (!Map.Tile.Get_CheckWall(x, y + 1))
                     {
                         Dir_Y = (y == size_y - 1) ? y : y + 1;
                     }
                     break;
                 case "Left":
-                    if (!Map.Tile.Get_CheckWalls(x - 1, y))
+                    if (!Map.Tile.Get_CheckWall(x - 1, y))
                     {
                         Dir_X = (x == 0) ? x : x - 1;
                     }
                     break;
                 case "Right":
-                    if (!Map.Tile.Get_CheckWalls(x + 1, y))
+                    if (!Map.Tile.Get_CheckWall(x + 1, y))
                     {
                         Dir_X = (x == size_x - 1) ? x : x + 1;
                     }

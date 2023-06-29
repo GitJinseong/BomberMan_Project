@@ -73,6 +73,7 @@ namespace BoMbErMaN
             Player.Set_LinkMap(Map);
             Player.Set_CreateBomb();
             Map.Set_CreateMap001();
+            Monster.Set_Moves(Map);
 
             // 델리 게이트 초기화
             FuncArray = new myDelegate[3];
@@ -87,10 +88,9 @@ namespace BoMbErMaN
                 Console.SetCursorPosition(0, 0);
                 Map.Get_PrintMap();
                 Player.Set_Actions();
-                Player.Get_IsDead();
                 Thread.Sleep(32);
-                Console.Clear();
-                if (1 <= Player.KillCount)
+                Player.Get_IsDead();
+                if (10 <= Player.KillCount)
                 {
                     stage++;
                     // 게임 클리어
@@ -99,6 +99,7 @@ namespace BoMbErMaN
                         Get_Clear();
                     }
                     FuncArray[stage]();
+                    Player.Set_Move(Map.MapSize_X / 2, Map.MapSize_Y / 2);
                     Player.Set_ResetCount();
                 }
             }

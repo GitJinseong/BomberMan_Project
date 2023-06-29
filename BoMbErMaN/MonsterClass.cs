@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoMbErMaN.Manager;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,6 @@ namespace BoMbErMaN
         public int Def { get; protected set; } = default;
         public int Dir_X { get; protected set; } = default;
         public int Dir_Y { get; protected set; } = default;
-        MonsterAIClass AI = new MonsterAIClass();
 
         public void Set_Damage(int damage)
         {
@@ -24,5 +24,8 @@ namespace BoMbErMaN
             Hp = (Hp - damage) < 0 ? 0 : Hp - damage;
         }
 
+        public void Set_Dir_X(int x) { Dir_X = x; }
+
+        public void Set_Dir_Y(int y) { Dir_Y = y; }
     }
 }
