@@ -40,10 +40,10 @@ namespace BoMbErMaN
             Console.CursorVisible = false;
 
             // 콘솔 창 크기 설정
-            Console.SetWindowSize(110, 25);
+            Console.SetWindowSize(110, 30);
 
             // 버퍼 사이즈 설정
-            Console.SetBufferSize(110, 25);
+            Console.SetBufferSize(110, 30);
 
             // 커서 위치 설정
             Console.SetCursorPosition(0, 0);
@@ -85,8 +85,10 @@ namespace BoMbErMaN
             // 게임 실행
             while (true)
             {
+                Console.SetCursorPosition(0, 0);
                 Map.Get_PrintMap();
                 Player.Set_Actions();
+                Thread.Sleep(32);
                 Player.Get_IsDead();
                 if (10 <= Player.KillCount)
                 {
@@ -100,7 +102,6 @@ namespace BoMbErMaN
                     Player.Set_Move(Map.MapSize_X / 2, Map.MapSize_Y / 2);
                     Player.Set_ResetCount();
                 }
-                Thread.Sleep(100);
             }
         }
     }

@@ -102,7 +102,7 @@ namespace BoMbErMaN
                 }
             }
             Monster.Get_IsDead();
-            Map.Get_PrintMap();
+            if (time > 0) { Map.Get_PrintMap(); }
             Player.BombCount += 1;
             Set_RemoveExplosion(x, y);
         }
@@ -110,6 +110,7 @@ namespace BoMbErMaN
         public async Task Set_RemoveExplosion(int x, int y)
         {
             await Task.Delay(ExplosionTime / 4);
+            //bool up = false; bool down = false; bool left = false; bool right = false;
             Map.Tile.Board[y, x] = "　";
             for (int i = 1; i < Player.BombPower; i++)
             {
@@ -130,6 +131,7 @@ namespace BoMbErMaN
                     Map.Tile.Board[y, x + i] = "　";
                 }
             }
+            //Map.Get_PrintMap();
         }
     }
 }
