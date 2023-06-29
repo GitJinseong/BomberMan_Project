@@ -98,7 +98,7 @@ namespace BoMbErMaN.Manager
                         }
                     }
                 }
-
+                await Task.Delay(500);
                 Console.Clear();
                 map.Get_PrintMap();
             }    
