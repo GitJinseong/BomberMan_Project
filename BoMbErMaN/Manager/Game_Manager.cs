@@ -88,7 +88,6 @@ namespace BoMbErMaN
                 Console.SetCursorPosition(0, 0);
                 Map.Get_PrintMap();
                 Player.Set_Actions();
-                Thread.Sleep(32);
                 Player.Get_IsDead();
                 if (10 <= Player.KillCount)
                 {
@@ -102,6 +101,7 @@ namespace BoMbErMaN
                     Player.Set_Move(Map.MapSize_X / 2, Map.MapSize_Y / 2);
                     Player.Set_ResetCount();
                 }
+                Thread.Sleep(100);
             }
         }
     }

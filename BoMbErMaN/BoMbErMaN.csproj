@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\BombClass.cs" />
+    <Compile Include="Class\ItemBlockClass.cs" />
     <Compile Include="Manager\Bomb_Manager.cs" />
     <Compile Include="Manager\Character_Manager.cs" />
     <Compile Include="Manager\Game_Manager.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Manager\Monster_Manager.cs" />
     <Compile Include="Manager\Title_Manager.cs" />
     <Compile Include="Manager\UI_Manager.cs" />
+    <Compile Include="Manager\ItemBlock_Manager.cs" />
     <Compile Include="Manager\Wall_Manager.cs" />
     <Compile Include="Class\MonsterClass.cs" />
     <Compile Include="Class\PlayerClass.cs" />

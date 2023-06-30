@@ -33,7 +33,7 @@ namespace BoMbErMaN
             Bomb = bomb_;
             Player.BombCount -= 1;
             Map.Tile.Board[y, x] = "δ";
-            Map.Get_PrintMap();
+            //Map.Get_PrintMap();
             cancellationToken = cancellationTokenSource.Token;
             Set_Explosion(x, y, ExplosionTime, cancellationToken);
         }
@@ -55,7 +55,7 @@ namespace BoMbErMaN
             {
                 if (!(y - i < 0) && "δ" != Map.Tile.Board[y - i, x] && "■" != Map.Tile.Board[y - i, x])
                 {
-                    if (!up) { Map.Tile.Board[y - i, x] = "※"; }
+                    if (!up) { Get_CheckItemBlock(x, y - i);  Map.Tile.Board[y - i, x] = "※"; }
                 }
                 else {
                     Bomb.Get_FindBomb(x, y - i);
@@ -63,7 +63,7 @@ namespace BoMbErMaN
                 }
                 if (!(y + i > Map.MapSize_Y - 1) && Map.Tile.Board[y + i, x] != "δ" && "■" != Map.Tile.Board[y + i, x])
                 {
-                    if (!down) { Map.Tile.Board[y + i, x] = "※"; }
+                    if (!down) { Get_CheckItemBlock(x, y + i);  Map.Tile.Board[y + i, x] = "※"; }
                 }
                 else {
                     Bomb.Get_FindBomb(x, y + i);
@@ -71,7 +71,7 @@ namespace BoMbErMaN
                 }
                 if (!(x - i < 0)&& Map.Tile.Board[y, x - i] != "δ" && "■" != Map.Tile.Board[y, x - i])
                 {
-                    if (!left) { Map.Tile.Board[y, x - i] = "※"; }
+                    if (!left) { Get_CheckItemBlock(x - i, y);  Map.Tile.Board[y, x - i] = "※"; }
 
                 }
                 else {
@@ -80,7 +80,7 @@ namespace BoMbErMaN
                 }
                 if (!(x + i > Map.MapSize_X - 1) && Map.Tile.Board[y, x + i] != "δ" && "■" != Map.Tile.Board[y, x + i])
                 {
-                    if (!right) { Map.Tile.Board[y, x + i] = "※"; }
+                    if (!right) { Get_CheckItemBlock(x + i, y);  Map.Tile.Board[y, x + i] = "※"; }
                 }
                 else
                 {
@@ -103,14 +103,13 @@ namespace BoMbErMaN
             }
             Monster.Get_IsDead();
             if (time > 0) { Map.Get_PrintMap(); }
-            Player.BombCount += 1;
             Set_RemoveExplosion(x, y);
         }
 
         public async Task Set_RemoveExplosion(int x, int y)
         {
             await Task.Delay(ExplosionTime / 4);
-            //bool up = false; bool down = false; bool left = false; bool right = false;
+            Player.BombCount += 1;
             Map.Tile.Board[y, x] = "　";
             for (int i = 1; i < Player.BombPower; i++)
             {
@@ -131,7 +130,22 @@ namespace BoMbErMaN
                     Map.Tile.Board[y, x + i] = "　";
                 }
             }
-            //Map.Get_PrintMap();
+        }
+
+        public void Get_CheckItemBlock(int x, int y)
+        {
+            if (Map.Tile.Board[y, x] == "▧")
+            {
+                for (int i = 0; i < Map.Tile.ItemBlock.List.Count; i++)
+                {
+                    int x2 = Map.Tile.ItemBlock.List[i].Dir_X;
+                    int y2 = Map.Tile.ItemBlock.List[i].Dir_Y;
+                    if (x == x2 && y2 == y)
+                    {
+                        Map.Tile.ItemBlock.Set_DropItem(i);
+                    }
+                }
+            }
         }
     }
 }

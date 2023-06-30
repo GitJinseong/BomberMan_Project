@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BoMbErMaN.Manager
 {
@@ -72,28 +73,36 @@ namespace BoMbErMaN.Manager
                                 {
                                     List[i].Set_Dir_Y((y == 0) ? y : y - 1);
                                     moveCount++;
+                                    Set_Attack(x, y - 1);
                                 }
+                                else { Set_Attack(x, y - 1); }
                                 break;
                             case 1:
                                 if (!map.Tile.Get_CheckMonsterMove(x - 1, y))
                                 {
                                     List[i].Set_Dir_X((x == 0) ? x : x - 1);
                                     moveCount++;
+                                    Set_Attack(x - 1, y);
                                 }
+                                else { Set_Attack(x - 1, y); }
                                 break;
                             case 2:
                                 if (!map.Tile.Get_CheckMonsterMove(x, y + 1))
                                 {
                                     List[i].Set_Dir_Y((y == size_y - 1) ? y : y + 1);
                                     moveCount++;
+                                    Set_Attack(x, y + 1);
                                 }
-                                break;
+                                else { Set_Attack(x, y + 1); }
+                                break;    
                             case 3:
                                 if (!map.Tile.Get_CheckMonsterMove(x + 1, y))
                                 {
                                     List[i].Set_Dir_X((x == size_x - 1) ? x : x + 1);
                                     moveCount++;
+                                    Set_Attack(x + 1, y);
                                 }
+                                else { Set_Attack(x + 1, y); }
                                 break;
                         }
                     }
@@ -102,6 +111,15 @@ namespace BoMbErMaN.Manager
                 Console.Clear();
                 map.Get_PrintMap();
             }    
+        }
+
+        public void Set_Attack(int x, int y)
+        {
+            if (x == Player.Dir_X && Player.Dir_Y == y)
+            {
+                Player.Set_Damage(List[0].Atk);
+                Player.IsHit = 1;
+            }
         }
 
         public void Get_IsDead()

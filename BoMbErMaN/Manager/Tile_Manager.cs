@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,26 +14,44 @@ namespace BoMbErMaN
         public int Size_Y = default;
         public string[,] Board = default;
         public Wall_Manager Wall = default;
+        public ItemBlock_Manager ItemBlock = default;
         public PlayerClass Player = default;
         public Monster_Manager Monster = default;
-        public Tile_Manager(int x, int y, int wallSize, PlayerClass player_, Monster_Manager monster_)
+        public Tile_Manager(int x, int y, int wallSize, int itemBlockSize, PlayerClass player_, Monster_Manager monster_)
         {
             Size_X = x;
             Size_Y = y;
             Board = new string[y, x];
             Wall = new Wall_Manager(wallSize);
             Player = player_;
+            ItemBlock = new ItemBlock_Manager(itemBlockSize, Player);
             Monster = monster_;
         }
 
         public bool Get_CheckWall(int x, int y)
         {
-            if ((0 > y || 0 > x || Size_X - 1 < x || Size_Y - 1 < y) || ("　" != Board[y, x] && Board[y, x] != "▼"))
+            if ((0 > y || 0 > x || Size_X - 1 < x || Size_Y - 1 < y) || ("　" != Board[y, x] && "▼" != Board[y, x] && "★" != Board[y, x] && "♥" != Board[y, x] && "＋" != Board[y, x]))
             {
                 return true;
             }
 
             return false;
+        }
+
+        public void Get_CheckItemBlock(int x, int y)
+        {
+            if (Board[y, x] != "★" || Board[y, x] != "♥" || Board[y, x] != "＋")
+            {
+                for (int i = 0; i < ItemBlock.List.Count; i++)
+                {
+                    int x2 = ItemBlock.List[i].Dir_X;
+                    int y2 = ItemBlock.List[i].Dir_Y;
+                    if (x == x2 && y2 == y)
+                    {
+                        ItemBlock.Set_RemoveBlock(i);
+                    }
+                }
+            }
         }
 
         public bool Get_CheckMonsterMove(int x, int y)
@@ -62,6 +81,14 @@ namespace BoMbErMaN
                         if (x == Monster.List[i].Dir_X && Monster.List[i].Dir_Y == y)
                         {
                             Board[y, x] = Monster.List[i].Pattern;
+                        }
+                    }
+
+                    for (int i = 0; i < ItemBlock.List.Count; i++)
+                    {
+                        if (x == ItemBlock.List[i].Dir_X && ItemBlock.List[i].Dir_Y == y)
+                        {
+                            Board[y, x] = ItemBlock.List[i].Pattern;
                         }
                     }
 

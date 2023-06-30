@@ -11,9 +11,9 @@ namespace BoMbErMaN
 
         public SlimeChild(int dir_X_, int dir_Y_)
         {
-            Hp = 30;
-            Atk = 10;
-            Def = 3;
+            Hp = 20;
+            Atk = 20;
+            Def = 0;
             Dir_X = dir_X_;
             Dir_Y = dir_Y_;
             Pattern = "ⓢ";

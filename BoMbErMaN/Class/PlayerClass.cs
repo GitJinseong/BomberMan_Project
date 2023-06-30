@@ -21,8 +21,8 @@ namespace BoMbErMaN
         public int Dir_Y { get; private set; } = 8;
 
         public int IsHit = 0; // 1일 경우 true
-        public int BombCount = 3;   // 보유한 폭탄 갯수
-        public int BombPower = 10;  // 폭발 범위
+        public int BombCount = 1;   // 보유한 폭탄 갯수
+        public int BombPower = 2;  // 폭발 범위
         public int KillCount = 0;   // 잡은 몬스터 마릿수
         public int stage = 0;
 
@@ -57,6 +57,23 @@ namespace BoMbErMaN
             Map = map_;
         }
 
+        public void Set_AddStat()
+        {
+            Atk += 6;
+            Def += 3;
+        }
+
+        public void Set_AddBombStat()
+        {
+            BombCount++;
+            BombPower++;
+        }
+
+        public void Set_Heal(int heal)
+        {
+            Hp = (Hp + heal) > MaxHP ? MaxHP : Hp + heal;
+        }
+
         public void Set_CreateBomb()
         {
             Bomb = new Bomb_Manager(this, Map, UI);
@@ -76,11 +93,6 @@ namespace BoMbErMaN
         {
             damage = damage < Def ? 1 : damage - Def;
             Hp = (Hp - damage) < 0 ? 0 : Hp - damage;
-        }
-
-        public void Set_Heal(int heal)
-        {
-            Hp = (Hp + heal) > MaxHP ? MaxHP : Hp + heal;
         }
 
         public void Set_Teleport(int x, int y)
@@ -107,24 +119,28 @@ namespace BoMbErMaN
                     if (!Map.Tile.Get_CheckWall(x, y - 1))
                     {
                         Dir_Y = (y == 0) ? y : y - 1;
+                        Map.Tile.Get_CheckItemBlock(x, Dir_Y);
                     }
                     break;
                 case "Down":
                     if (!Map.Tile.Get_CheckWall(x, y + 1))
                     {
                         Dir_Y = (y == size_y - 1) ? y : y + 1;
+                        Map.Tile.Get_CheckItemBlock(x, Dir_Y);
                     }
                     break;
                 case "Left":
                     if (!Map.Tile.Get_CheckWall(x - 1, y))
                     {
                         Dir_X = (x == 0) ? x : x - 1;
+                        Map.Tile.Get_CheckItemBlock(Dir_X, y);
                     }
                     break;
                 case "Right":
                     if (!Map.Tile.Get_CheckWall(x + 1, y))
                     {
                         Dir_X = (x == size_x - 1) ? x : x + 1;
+                        Map.Tile.Get_CheckItemBlock(Dir_X, y);
                     }
                     break;
                 case "Space":
