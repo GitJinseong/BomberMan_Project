@@ -47,22 +47,19 @@ namespace BoMbErMaN.Manager
 
         public void Set_RemoveBlock(int index)
         {
-            if (random.Next(0,9) > 5)
+            switch (List[index].Pattern)
             {
-                switch (List[index].Pattern)
-                {
-                    case "★":
-                        Player.Set_AddStat();
-                        break;
+                case "★":
+                    Player.Set_AddStat();
+                    break;
 
-                    case "♥":
-                        Player.Set_Heal(50);
-                        break;
+                case "♥":
+                    Player.Set_Heal(50);
+                    break;
 
-                    case "＋":
-                        Player.Set_AddBombStat();
-                        break;
-                }
+                case "＋":
+                    Player.Set_AddBombStat();
+                    break;
             }          
             List.RemoveAt(index);
         }
