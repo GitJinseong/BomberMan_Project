@@ -102,7 +102,6 @@ namespace BoMbErMaN
                 }
             }
             Monster.Get_IsDead();
-            if (time > 0) { Map.Get_PrintMap(); }
             Set_RemoveExplosion(x, y);
         }
 

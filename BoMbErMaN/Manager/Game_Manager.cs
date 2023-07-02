@@ -24,6 +24,15 @@ namespace BoMbErMaN
         delegate void myDelegate();
         myDelegate[] FuncArray = default;
 
+        public async Task ScreenRefresh(int time)
+        {
+            while (true)
+            {
+                await Task.Delay(time);
+                Map.Get_PrintMap();
+            }
+        }
+
         public void Get_Clear()
         {
             Console.Clear();
@@ -81,12 +90,13 @@ namespace BoMbErMaN
             FuncArray[1] = Map.Set_CreateMap002;
             FuncArray[2] = Map.Set_CreateMap003;
 
+            // 화면갱신
+            ScreenRefresh(32); // 30fps
+
             int stage = 0;
             // 게임 실행
             while (true)
             {
-                Console.SetCursorPosition(0, 0);
-                Map.Get_PrintMap();
                 Player.Set_Actions();
                 Player.Get_IsDead();
                 if (10 <= Player.KillCount)

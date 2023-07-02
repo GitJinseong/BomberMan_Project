@@ -107,9 +107,6 @@ namespace BoMbErMaN.Manager
                         }
                     }
                 }
-
-                Console.Clear();
-                map.Get_PrintMap();
             }    
         }
 
