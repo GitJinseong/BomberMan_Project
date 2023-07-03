@@ -56,8 +56,15 @@ namespace BoMbErMaN.Manager
             for (int i = 0; i < (Player.Hp / 50); i++)
             {
                 str = str + "♥";
+
             }
-            Console.WriteLine(str.PadLeft(16 + (Player.Hp / 50)));
+            Console.Write(str.PadLeft(16 + (Player.Hp / 50)));
+            int different = (Player.MaxHP / 50) - (Player.Hp / 50);
+            for (int i = 0; i < different; i++)
+            {
+                Console.Write("♡");
+            }
+            Console.WriteLine();
 
             str = "Atk: ";
             for (int i = 0; i < (Player.Atk / 10); i++)

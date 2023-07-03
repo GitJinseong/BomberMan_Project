@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -24,17 +25,21 @@ namespace BoMbErMaN
         delegate void myDelegate();
         myDelegate[] FuncArray = default;
 
+        bool isRunning = true;
+
         public async Task ScreenRefresh(int time)
         {
-            while (true)
+            while (isRunning)
             {
                 await Task.Delay(time);
                 Map.Get_PrintMap();
+                Player.Get_IsDead();
             }
         }
 
         public void Get_Clear()
         {
+            isRunning = false;
             Console.Clear();
             while (true)
             {
@@ -98,12 +103,11 @@ namespace BoMbErMaN
             while (true)
             {
                 Player.Set_Actions();
-                Player.Get_IsDead();
                 if (10 <= Player.KillCount)
                 {
                     stage++;
                     // 게임 클리어
-                    if (stage == 3)
+                    if (stage >= 3)
                     {
                         Get_Clear();
                     }

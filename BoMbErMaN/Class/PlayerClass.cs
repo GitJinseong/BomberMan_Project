@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,8 +22,8 @@ namespace BoMbErMaN
         public int Dir_Y { get; private set; } = 8;
 
         public int IsHit = 0; // 1일 경우 true
-        public int BombCount = 1;   // 보유한 폭탄 갯수
-        public int BombPower = 2;  // 폭발 범위
+        public int BombCount = 7;   // 보유한 폭탄 갯수
+        public int BombPower = 7;  // 폭발 범위
         public int KillCount = 0;   // 잡은 몬스터 마릿수
         public int stage = 0;
 
